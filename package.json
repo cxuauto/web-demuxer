@@ -37,7 +37,7 @@
     "build:wasm": "npm run make:ffmpeg-lib && npm run make:web-demuxer",
     "build:wasm:all": "npm run build:wasm && npm run build:wasm:mini",
     "build:all": "npm run build:wasm:all && npm run build",
-    "test": "vitest --config test.config.ts",
+    "test": "vitest",
     "lint": "lint-staged",
     "prepublishOnly": "npm run build",
     "release": "release-it",
