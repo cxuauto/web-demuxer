@@ -26,7 +26,7 @@ interface WebDemuxerOptions {
  */
 export class WebDemuxer {
   private ffmpegWorker: Worker;
-  private ffmpegWorkerLoadStatus: Promise<boolean>;
+  private ffmpegWorkerLoadStatus: Promise<void>;
   private msgId: number;
 
   public file?: File;
@@ -44,7 +44,7 @@ export class WebDemuxer {
         }
 
         if (type === FFMpegWorkerMessageType.WASMRuntimeInitialized) {
-          resolve(true);
+          resolve();
         }
 
         if (type === FFMpegWorkerMessageType.LoadWASM && errMsg) {
@@ -98,11 +98,9 @@ export class WebDemuxer {
    * @returns load status
    */
   public async load(file: File) {
-    const status = await this.ffmpegWorkerLoadStatus;
+    await this.ffmpegWorkerLoadStatus;
 
     this.file = file;
-
-    return status;
   }
 
   /**
