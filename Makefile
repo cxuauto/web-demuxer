@@ -9,8 +9,12 @@ FFMPEG_CONFIGURE_ARGS = \
 	--enable-avformat \
 	--enable-protocol=file
 
+NANO_DEMUX_ARGS = \
+	--enable-demuxer=mov,mp4,matroska,webm
+
 MINI_DEMUX_ARGS = \
 	--enable-demuxer=mov,mp4,m4a,3gp,3g2,matroska,webm,m4v
+
 
 DEMUX_ARGS = \
 	--enable-decoder=h264,hevc,vp9,vp8 \
@@ -54,3 +58,6 @@ web-demuxer:
 	
 web-demuxer-mini:
 	$(WEB_DEMUXER_ARGS) -o ./src/lib/ffmpeg-mini.js
+
+web-demuxer-nano:
+	$(WEB_DEMUXER_ARGS) -o ./src/lib/ffmpeg-nano.js
