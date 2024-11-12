@@ -13,6 +13,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v4.1.0
+    - uses: ndeloof/install-compose-action@v0.0.1
     - name: Build Scripts
       run: |
         npm run dev:docker:x86_64
@@ -23,11 +24,14 @@ jobs:
         name: Upload dist
         path: |
           dist/*
+          src/lib/*.js
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: dist/*
+        file: |
+          dist/*
+          src/lib/*.js
         file_glob: true
         tag: "C-dist"
         overwrite: true
